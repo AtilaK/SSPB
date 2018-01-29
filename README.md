@@ -1,1 +1,2 @@
 # SSPB
+A coding kata
