@@ -2,6 +2,11 @@ package game;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
 import decisionmakers.BasicDecisionMaker;
 import decisionmakers.DecisionMaker;
 import decisionmakers.EnhancedDecisionMaker;
@@ -12,15 +17,20 @@ import items.Rock;
 import items.Scissor;
 import items.Well;
 
+@Component
 public class Game {
-
+	
+	private final Environment environment;
+	
 	private GameMode gameMode;
 	private Item userItem;	
 	private Item aiItem;	
 	private DecisionMaker decisionMaker;
 	
-	public Game(GameMode gameMode, Shape shape) {
+	public Game(Environment environment, GameMode gameMode, Shape shape) {
 			
+		this.environment = environment;
+		
 		this.gameMode = gameMode;
 		
 		if (gameMode.equals(GameMode.BASIC)) {
@@ -56,15 +66,15 @@ public class Game {
 		StringBuffer resultMessage = new StringBuffer();
 		
 		if (selections.isTie()) {
-			resultMessage.append("Unentschieden!"+ "\n");
+			resultMessage.append(environment.getProperty("resultMessage.tie"));
 		} else if (selections.isUserAWinner()) {
-			resultMessage.append("DU hast gewonnen!!!"+ "\n");			
+			resultMessage.append(environment.getProperty("resultMessage.win"));			
 		} else {
-			resultMessage.append("Leider hat dein Gegenspieler gewonnen!"+ "\n");
+			resultMessage.append(environment.getProperty("resultMessage.loose"));
 		}
 		
-		resultMessage.append("Dein Symbol:"+ userItem.getShape() + " Gegenspieler's Symbol:"+aiItem.getShape()+ "\n");
-		resultMessage.append("Spielmodus:"+gameMode+ "\n");
+		resultMessage.append(environment.getProperty("shape.your")+ userItem.getShape() + environment.getProperty("shape.opponent")+aiItem.getShape());
+		resultMessage.append(environment.getProperty("gameMode")+gameMode);
 		
 		return resultMessage.toString();
 	}

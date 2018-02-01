@@ -6,6 +6,8 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,9 +22,11 @@ import game.Shape;
 @RestController
 public class PlayController {
 	  
+	@Autowired Environment environment;
+	
     @RequestMapping("/")
     public String index() {    	
-          return "Welcome to scissor rock paper (well) game! \n Select an item and game mode (basic or with well enhanced)" + "\n";
+          return environment.getProperty("welcome");
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/play", produces = APPLICATION_JSON_VALUE)
@@ -38,8 +42,8 @@ public class PlayController {
     		gameMode = GameMode.ENHANCED;
     	}
 	  	
-    	if (gameMode == null) {	
-    		throw new IllegalArgumentException("gameMode invalid. Valid values: klassik or fortgeschritten");
+    	if (gameMode == null) {
+    		throw new IllegalArgumentException(environment.getProperty("gameMode.invalid"));
     	}
 
     	String shapeString = player.getShape();
@@ -56,10 +60,10 @@ public class PlayController {
 		}
     	
     	if (shape == null) {
-    		throw new IllegalArgumentException("shape invalid. Valid values: stein or schere or papier. In gameMode fortgeschritten also brunnen is valid)"); 		
+    		throw new IllegalArgumentException(environment.getProperty("shape.invalid")); 		
     	}
 		
-    	Game game = new Game(gameMode, shape);
+    	Game game = new Game(environment, gameMode, shape);
    	
     	return game.play();
     			
