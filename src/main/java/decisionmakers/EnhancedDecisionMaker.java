@@ -1,35 +1,43 @@
-package core;
+package decisionmakers;
 
 import org.jeasy.rules.api.Facts;
 import org.jeasy.rules.api.Rules;
 import org.jeasy.rules.api.RulesEngine;
 import org.jeasy.rules.core.DefaultRulesEngine;
 
+import game.Selections;
 import rules.PaperRockRule;
 import rules.PaperScissorRule;
+import rules.PaperWellRule;
 import rules.RockPaperRule;
 import rules.RockScissorRule;
+import rules.RockWellRule;
 import rules.ScissorPaperRule;
 import rules.ScissorRockRule;
+import rules.ScissorWellRule;
 import rules.TieRule;
+import rules.WellPaperRule;
+import rules.WellRockRule;
+import rules.WellScissorRule;
 
-public class BasicDecisionMaker extends DecisionMaker {
+public class EnhancedDecisionMaker extends DecisionMaker {
 
-	private static BasicDecisionMaker instance = null;
-		
+	private static EnhancedDecisionMaker instance = null;
+
 	private static Facts facts;
 	
 	private static Rules rules;
 	
-	protected BasicDecisionMaker() {
+	private EnhancedDecisionMaker() {
 		
 	}
 	
-	public static BasicDecisionMaker getInstance() {
+	public static EnhancedDecisionMaker getInstance() {
 		if (instance == null) {
 			
-			instance = new BasicDecisionMaker();
-			
+			instance = new EnhancedDecisionMaker();			
+			instance.setEnhancedDecisionMaker(true);
+
 			facts = new Facts();			
 		    rules = new Rules();
 		    
@@ -39,6 +47,15 @@ public class BasicDecisionMaker extends DecisionMaker {
 		    rules.register(new RockScissorRule());
 		    rules.register(new ScissorPaperRule());
 		    rules.register(new ScissorRockRule());
+		    
+		    // rules for advanced game
+		    rules.register(new PaperWellRule());
+		    rules.register(new WellPaperRule());
+		    rules.register(new RockWellRule());
+		    rules.register(new WellRockRule());
+		    rules.register(new ScissorWellRule());
+		    rules.register(new WellScissorRule());	    
+		    
 		    rules.register(new TieRule());		    
 		}
 		return instance;
@@ -52,7 +69,6 @@ public class BasicDecisionMaker extends DecisionMaker {
 	    
 	    facts.remove("selections");
 	   
-	    // TODO should return false if decision making not possible!
 	    return true;
 	}
 

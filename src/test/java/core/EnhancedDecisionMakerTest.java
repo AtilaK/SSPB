@@ -5,6 +5,8 @@ import static org.hamcrest.Matchers.is;
 
 import org.junit.Test;
 
+import decisionmakers.EnhancedDecisionMaker;
+import game.Selections;
 import items.Paper;
 import items.Rock;
 import items.Scissor;
@@ -64,7 +66,7 @@ public class EnhancedDecisionMakerTest {
 	@Test
     public void testScissorPaper() {
 		Selections selections = new Selections(new Scissor(), new Paper());
-        BasicDecisionMaker.getInstance().decide(selections);       
+		EnhancedDecisionMaker.getInstance().decide(selections);       
         userAWinnerAndUserBLooser(selections);   
 	}
 	

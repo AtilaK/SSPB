@@ -6,6 +6,8 @@ import static org.hamcrest.Matchers.nullValue;
 
 import org.junit.Test;
 
+import decisionmakers.BasicDecisionMaker;
+import game.Selections;
 import items.Paper;
 import items.Rock;
 import items.Scissor;

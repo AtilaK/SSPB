@@ -5,7 +5,7 @@ import org.jeasy.rules.annotation.Condition;
 import org.jeasy.rules.annotation.Fact;
 import org.jeasy.rules.annotation.Rule;
 
-import core.Selections;
+import game.Selections;
 import items.Rock;
 import items.Scissor;
 

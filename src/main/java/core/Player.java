@@ -1,5 +1,10 @@
 package core;
 
+/**
+ * Playeris the DTO to transport JSON input for the REST service called play
+ * @author atila
+ * 
+ */
 public class Player {
 
 	public Player() {

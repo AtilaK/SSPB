@@ -5,6 +5,8 @@ import static org.hamcrest.Matchers.is;
 
 import org.junit.Test;
 
+import decisionmakers.BasicDecisionMaker;
+import game.Selections;
 import items.Paper;
 import items.Rock;
 import items.Scissor;

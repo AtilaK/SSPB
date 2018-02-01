@@ -1,42 +1,36 @@
-package core;
+package decisionmakers;
 
 import org.jeasy.rules.api.Facts;
 import org.jeasy.rules.api.Rules;
 import org.jeasy.rules.api.RulesEngine;
 import org.jeasy.rules.core.DefaultRulesEngine;
 
+import game.Selections;
 import rules.PaperRockRule;
 import rules.PaperScissorRule;
-import rules.PaperWellRule;
 import rules.RockPaperRule;
 import rules.RockScissorRule;
-import rules.RockWellRule;
 import rules.ScissorPaperRule;
 import rules.ScissorRockRule;
-import rules.ScissorWellRule;
 import rules.TieRule;
-import rules.WellPaperRule;
-import rules.WellRockRule;
-import rules.WellScissorRule;
 
-public class EnhancedDecisionMaker extends DecisionMaker {
+public class BasicDecisionMaker extends DecisionMaker {
 
-	private static EnhancedDecisionMaker instance = null;
-
+	private static BasicDecisionMaker instance = null;
+		
 	private static Facts facts;
 	
 	private static Rules rules;
 	
-	protected EnhancedDecisionMaker() {
+	private BasicDecisionMaker() {
 		
 	}
 	
-	public static EnhancedDecisionMaker getInstance() {
+	public static BasicDecisionMaker getInstance() {
 		if (instance == null) {
 			
-			instance = new EnhancedDecisionMaker();			
-			instance.setEnhancedDecisionMaker(true);
-
+			instance = new BasicDecisionMaker();
+			
 			facts = new Facts();			
 		    rules = new Rules();
 		    
@@ -46,30 +40,21 @@ public class EnhancedDecisionMaker extends DecisionMaker {
 		    rules.register(new RockScissorRule());
 		    rules.register(new ScissorPaperRule());
 		    rules.register(new ScissorRockRule());
-		    
-		    // rules for advanced game
-		    rules.register(new PaperWellRule());
-		    rules.register(new WellPaperRule());
-		    rules.register(new RockWellRule());
-		    rules.register(new WellRockRule());
-		    rules.register(new ScissorWellRule());
-		    rules.register(new WellScissorRule());	    
-		    
 		    rules.register(new TieRule());		    
 		}
 		return instance;
 	}
 		
-	public String decide(Selections selections) {
+	public boolean decide(Selections selections) {
 		
 		facts.put("selections", selections);
 	    RulesEngine rulesEngine = new DefaultRulesEngine();
 	    rulesEngine.fire(rules, facts);
-	    rulesEngine.check(rules, facts);
 	    
 	    facts.remove("selections");
 	   
-	    return "decision made";
+	    // TODO should return false if decision making not possible!
+	    return true;
 	}
 
 }

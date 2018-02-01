@@ -1,5 +1,10 @@
 package items;
 
-public class Rock extends Item {
+import game.Shape;
 
+public class Rock extends Item {
+	
+	public Rock () {
+		this.setShape(Shape.ROCK);
+	}
 }
