@@ -57,7 +57,7 @@ public class PlayController {
    		
     	Selections selections = game.play();
     	
-    	return responseWithGameResult(selections, gameMode);    			
+    	return createPlayResponse(selections, gameMode);    			
     }
 
 	private GameMode analyseGameMode(PlayRequest userRequest) {
@@ -82,36 +82,39 @@ public class PlayController {
 		return null;
 	}
 
-	private PlayResponse responseWithGameResult(Selections selections, GameMode gameMode) {
+	private PlayResponse createPlayResponse(Selections selections, GameMode gameMode) {
 		
-		PlayResponse humanUserResponse = new PlayResponse();
+		PlayResponse playResponse = new PlayResponse();
 		
 		GameResult gameResult = selections.getGameResult();
 		
-		String userAShapeString = selections.getHumanUserItem().getShape().toString();		
-		String userBShapeString = selections.getAIUserItem().getShape().toString();
+		String humanUserShape = selections.getHumanUserItem().getShape().toString();		
+		String aiUserShape = selections.getAIUserItem().getShape().toString();
 		
 		if (GameResult.TIE.equals(gameResult)) {
-			humanUserResponse.setResultShort(GameResult.TIE.toString());
-			humanUserResponse.setResultDetailed(environment.getProperty("resultMessage.tie")+"  >>>"+
-					" ["+userAShapeString+"] "+" --- "+" ["+userBShapeString+"] ");
+			playResponse.setResultShort(GameResult.TIE.toString());
+			playResponse.setResultDetailed(createResultDetailString("resultMessage.tie", humanUserShape, aiUserShape));
+			
 		} else if (GameResult.WON.equals(gameResult)) {
-			humanUserResponse.setResultShort(GameResult.WON.toString());
-			humanUserResponse.setResultDetailed(environment.getProperty("resultMessage.win")+"  >>>"+
-					" ["+userAShapeString+"] "+" --- "+" ["+userBShapeString+"] ");			
+			playResponse.setResultShort(GameResult.WON.toString());
+			playResponse.setResultDetailed(createResultDetailString("resultMessage.win", humanUserShape, aiUserShape));
+			
 		} else {
-			humanUserResponse.setResultShort(GameResult.LOST.toString());
-			humanUserResponse.setResultDetailed(environment.getProperty("resultMessage.lost")+"  >>>"+
-					" ["+userAShapeString+"] "+" --- "+" ["+userBShapeString+"] ");	
+			playResponse.setResultShort(GameResult.LOST.toString());
+			playResponse.setResultDetailed(createResultDetailString("resultMessage.lost", humanUserShape, aiUserShape));			
 		}		
 		
-		humanUserResponse.setYourShape(userAShapeString);;
-		humanUserResponse.setOpponentShape(userBShapeString);;
-		humanUserResponse.setGameMode(gameMode.toString());
+		playResponse.setYourShape(humanUserShape);;
+		playResponse.setOpponentShape(aiUserShape);;
+		playResponse.setGameMode(gameMode.toString());
 		
-		return humanUserResponse;
+		return playResponse;
 	}
     
+	private String createResultDetailString(String message, String humanUserShape, String aiUserShape) {
+		return environment.getProperty(message)+"  >>> ["+humanUserShape+"] "+" --- "+" ["+aiUserShape+"] ";
+	}
+	
     @ExceptionHandler
     void handleIllegalArgumentException(IllegalArgumentException e, HttpServletResponse response) throws IOException {
         response.sendError(HttpStatus.BAD_REQUEST.value());
