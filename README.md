@@ -1,6 +1,13 @@
 # SSPB
 A coding kata
 
+# ToDo
+
+- add tests for playcontroller
+- add check for rules: Not both users can win!
+- logging missing
+- swagger for REST API?
+
 # sample client calls
 
 curl -X POST -H "Content-Type: application/json" http://localhost:8080/play -d '{"shape": "stein", "gameMode": "Klassik"}'
@@ -23,4 +30,3 @@ curl -X POST -H "Content-Type: application/json" http://localhost:8080/play -d '
 
 mvn package 			=> packages the jar
 mvn spring-boot::run 	=> runs the jar (spring boot application)
-to start in debug       => right click on the main class of the application 

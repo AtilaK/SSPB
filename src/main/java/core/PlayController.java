@@ -29,11 +29,6 @@ public class PlayController {
 	@Autowired Environment environment;
 	
 	@Autowired Game game;
-	
-    @RequestMapping("/")
-    public String index() {    	
-          return environment.getProperty("welcome");
-    }
 
     @RequestMapping(method = RequestMethod.POST, value = "/play", produces = APPLICATION_JSON_VALUE)
     public @ResponseBody PlayResponse play(@RequestBody PlayRequest userRequest) {
