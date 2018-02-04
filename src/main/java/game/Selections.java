@@ -24,20 +24,31 @@ public class Selections {
 	public void setUserBItem(Item userBItem) {
 		this.userBItem = userBItem;
 	}
-	public boolean isTie() {
-		return !userAItem.isWinner() && !userBItem.isWinner();
+
+	/**
+	 * 
+	 * @return the game result from the human user perspective 
+	 */
+	public GameResult getGameResult() {
+		if (userAItem.isWinner()) {
+			return GameResult.WON; 
+		} else if (userBItem.isWinner()) {
+			return GameResult.LOST;
+		}
+		return GameResult.TIE;
 	}
-	public boolean isUserAWinner() {
-		return userAItem.isWinner();
-	}
+	
 	public Item getWinningItem () {
-		if (isTie()) {
+		
+		GameResult gameResult = getGameResult();
+		
+		if (GameResult.TIE.equals(gameResult)) {
 			return null;
-		} else if (userAItem.isWinner()) {
+		} else if (GameResult.WON.equals(gameResult)){
 			return userAItem;
 		} else {
 			return userBItem;
-		}
+		}		
 	}
 	
 }

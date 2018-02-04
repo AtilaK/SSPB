@@ -2,10 +2,7 @@ package game;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import decisionmakers.BasicDecisionMaker;
 import decisionmakers.DecisionMaker;
@@ -20,65 +17,50 @@ import items.Well;
 @Component
 public class Game {
 	
-	private final Environment environment;
-	
 	private GameMode gameMode;
 	private Item userItem;	
 	private Item aiItem;	
 	private DecisionMaker decisionMaker;
 	
-	public Game(Environment environment, GameMode gameMode, Shape shape) {
-			
-		this.environment = environment;
-		
-		this.gameMode = gameMode;
-		
-		if (gameMode.equals(GameMode.BASIC)) {
-			decisionMaker = BasicDecisionMaker.getInstance();
-		} else if (gameMode.equals(GameMode.ENHANCED)) {
-			decisionMaker = EnhancedDecisionMaker.getInstance();
-		}
-					
+	public Game() {
+		this.gameMode = GameMode.BASIC;		
+	}
+	
+	public void setToEnhancedMode () {
+		this.gameMode = GameMode.ENHANCED;
+	}
+	
+	public void setUserItemForShape (Shape shape) {
 		userItem = ItemFactory.getItemWithShape(shape);
-		
 	}
 
 	public Item getUserItem() {
 		return userItem;
 	}
 	
-	public String play () {
+	public Selections play () {
     	
     	this.aiItem = null;
     	
     	if (gameMode.equals(GameMode.BASIC)) {    	
-    	
+    		decisionMaker = BasicDecisionMaker.getInstance();
     		this.aiItem = getRandomItem(4); 
     		
     	} if (gameMode.equals(GameMode.ENHANCED)) {  
-    		
+    		decisionMaker = EnhancedDecisionMaker.getInstance();
     		this.aiItem = getRandomItem(5);
     	}
     	
 		Selections selections = new Selections(userItem, aiItem);
-		decisionMaker.decide(selections);
-		
-		StringBuffer resultMessage = new StringBuffer();
-		
-		if (selections.isTie()) {
-			resultMessage.append(environment.getProperty("resultMessage.tie"));
-		} else if (selections.isUserAWinner()) {
-			resultMessage.append(environment.getProperty("resultMessage.win"));			
-		} else {
-			resultMessage.append(environment.getProperty("resultMessage.loose"));
-		}
-		
-		resultMessage.append(environment.getProperty("shape.your")+ userItem.getShape() + environment.getProperty("shape.opponent")+aiItem.getShape());
-		resultMessage.append(environment.getProperty("gameMode")+gameMode);
-		
-		return resultMessage.toString();
+		decisionMaker.decide(selections);		
+		return selections;
 	}
 	
+	/**
+	 * Creates a random item
+	 * bound = upper bound exclusive: 4 for basic game and 5 for enhanced game
+	 * @return
+	 */
 	private Item getRandomItem (int bound) {
 		
 		int randomNum = ThreadLocalRandom.current().nextInt(1, bound);

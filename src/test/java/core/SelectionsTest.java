@@ -3,10 +3,12 @@ package core;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
+import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Test;
 
 import decisionmakers.BasicDecisionMaker;
+import game.GameResult;
 import game.Selections;
 import items.Paper;
 import items.Rock;
@@ -17,16 +19,16 @@ public class SelectionsTest {
 	@Test
     public void isTiePositiveCase() {
 		Selections selections = new Selections(new Scissor(), new Scissor());
-        BasicDecisionMaker.getInstance().decide(selections);       
-        assertThat(selections.isTie(), is(true));
+        BasicDecisionMaker.getInstance().decide(selections);            
+        assertThat(selections.getGameResult(), is(GameResult.TIE));
 	}
 	
 	@Test
     public void isTieNegativeCase() {
 		Selections selections = new Selections(new Scissor(), new Rock());
         BasicDecisionMaker.getInstance().decide(selections);       
-        assertThat(selections.isTie(), is(false));
-	}
+        assertNotEquals(selections.getGameResult(), is(GameResult.TIE));
+    }
 	
 	@Test
     public void getWinningItemWinnerB() {

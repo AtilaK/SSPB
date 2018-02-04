@@ -7,22 +7,29 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import game.Game;
 import game.GameMode;
+import game.GameResult;
+import game.Selections;
 import game.Shape;
 
 @RestController
+@ComponentScan("game")
 public class PlayController {
 	  
 	@Autowired Environment environment;
+	
+	@Autowired Game game;
 	
     @RequestMapping("/")
     public String index() {    	
@@ -30,44 +37,82 @@ public class PlayController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/play", produces = APPLICATION_JSON_VALUE)
-    public String getPlayer(@RequestBody Player player) {
+    public @ResponseBody HumanUserResponse play(@RequestBody HumanUserRequest userRequest) {
     	
-    	String gameModeString = player.getGameMode();
-    
-    	GameMode gameMode = null;
-    	
-    	if (gameModeString.equals(GameMode.BASIC.toString())) {
-    		gameMode = GameMode.BASIC;
-    	} else if (gameModeString.equals(GameMode.ENHANCED.toString())) {
-    		gameMode = GameMode.ENHANCED;
-    	}
+     	GameMode gameMode = analyseGameMode(userRequest);
 	  	
     	if (gameMode == null) {
     		throw new IllegalArgumentException(environment.getProperty("gameMode.invalid"));
     	}
 
-    	String shapeString = player.getShape();
-    	Shape shape = null;
+    	if (gameMode.equals(GameMode.ENHANCED)) {
+    		game.setToEnhancedMode();
+    	}
     	
-		if (shapeString.equals(Shape.ROCK.toString())) {
-			shape = Shape.ROCK;
-		} else if (shapeString.equals(Shape.SCISSOR.toString())) {
-			shape = Shape.SCISSOR;
-		} else if (shapeString.equals(Shape.PAPER.toString())) {
-			shape = Shape.PAPER;
-		} else if (gameMode.equals(GameMode.ENHANCED) && shapeString.equals(Shape.WELL.toString())) {
-			shape = Shape.WELL;
-		}
+     	Shape shape = analyseShape(userRequest, gameMode);
     	
     	if (shape == null) {
     		throw new IllegalArgumentException(environment.getProperty("shape.invalid")); 		
     	}
-		
-    	Game game = new Game(environment, gameMode, shape);
-   	
-    	return game.play();
-    			
+		    	
+    	game.setUserItemForShape(shape);
+   		
+    	Selections selections = game.play();
+    	
+    	return responseWithGameResult(selections, gameMode);    			
     }
+
+	private GameMode analyseGameMode(HumanUserRequest userRequest) {
+		if (GameMode.BASIC.toString().equals(userRequest.getGameMode())) {
+    		return GameMode.BASIC;
+    	} else if (GameMode.ENHANCED.toString().equals(userRequest.getGameMode())) {
+    		return GameMode.ENHANCED;
+    	}
+		return null;
+	}
+    
+	private Shape analyseShape(HumanUserRequest userRequest, GameMode gameMode) {
+		if (Shape.ROCK.toString().equals(userRequest.getShape())) {
+			return Shape.ROCK;
+		} else if (Shape.SCISSOR.toString().equals(userRequest.getShape())) {
+			return Shape.SCISSOR;
+		} else if (Shape.PAPER.toString().equals(userRequest.getShape())) {
+			return Shape.PAPER;
+		} else if (gameMode.equals(GameMode.ENHANCED) && Shape.WELL.toString().equals(userRequest.getShape())) {
+			return Shape.WELL;
+		}
+		return null;
+	}
+
+	private HumanUserResponse responseWithGameResult(Selections selections, GameMode gameMode) {
+		
+		HumanUserResponse humanUserResponse = new HumanUserResponse();
+		
+		GameResult gameResult = selections.getGameResult();
+		
+		String userAShapeString = selections.getUserAItem().getShape().toString();		
+		String userBShapeString = selections.getUserBItem().getShape().toString();
+		
+		if (GameResult.TIE.equals(gameResult)) {
+			humanUserResponse.setResultShort(GameResult.TIE.toString());
+			humanUserResponse.setResultDetailed(environment.getProperty("resultMessage.tie")+":"+
+					userAShapeString+" --- "+userBShapeString);
+		} else if (GameResult.WON.equals(gameResult)) {
+			humanUserResponse.setResultShort(GameResult.WON.toString());
+			humanUserResponse.setResultDetailed(environment.getProperty("resultMessage.win")+":"+
+					userAShapeString+" --- "+userBShapeString);			
+		} else {
+			humanUserResponse.setResultShort(GameResult.LOST.toString());
+			humanUserResponse.setResultDetailed(environment.getProperty("resultMessage.lost")+":"+
+					userAShapeString+" --- "+userBShapeString);	
+		}		
+		
+		humanUserResponse.setYourShape(userAShapeString);;
+		humanUserResponse.setOpponentShape(userBShapeString);;
+		humanUserResponse.setGameMode(gameMode.toString());
+		
+		return humanUserResponse;
+	}
     
     @ExceptionHandler
     void handleIllegalArgumentException(IllegalArgumentException e, HttpServletResponse response) throws IOException {

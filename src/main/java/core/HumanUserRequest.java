@@ -1,17 +1,17 @@
 package core;
 
 /**
- * Playeris the DTO to transport JSON input for the REST service called play
+ * DTO to transport JSON input for the REST service called play
  * @author atila
  * 
  */
-public class Player {
+public class HumanUserRequest {
 
-	public Player() {
+	public HumanUserRequest() {
 
 	}
 	
-	public Player(String shape, String gameMode) {
+	public HumanUserRequest(String shape, String gameMode) {
 		this.shape = shape;
 		this.gameMode = gameMode;
 	}
