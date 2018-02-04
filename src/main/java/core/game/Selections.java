@@ -4,25 +4,25 @@ import core.items.Item;
 
 public class Selections {
 
-	private Item userAItem;	
-	private Item userBItem;
+	private Item humanUserItem;	
+	private Item aiUserItem;
 	
-	public Selections(Item userAItem, Item userBItem) {		
-		this.userAItem = userAItem;
-		this.userBItem = userBItem;
+	public Selections(Item humanUserItem, Item aiUserItem) {		
+		this.humanUserItem = humanUserItem;
+		this.aiUserItem = aiUserItem;
 	}
 	
-	public Item getUserAItem() {
-		return userAItem;
+	public Item getHumanUserItem() {
+		return humanUserItem;
 	}
-	public void setUserAItem(Item userAItem) {
-		this.userAItem = userAItem;
+	public void setHumanUserItem(Item item) {
+		this.humanUserItem = item;
 	}
-	public Item getUserBItem() {
-		return userBItem;
+	public Item getAIUserItem() {
+		return aiUserItem;
 	}
-	public void setUserBItem(Item userBItem) {
-		this.userBItem = userBItem;
+	public void setAIUserItem(Item item) {
+		this.aiUserItem = item;
 	}
 
 	/**
@@ -30,9 +30,9 @@ public class Selections {
 	 * @return the game result from the human user perspective 
 	 */
 	public GameResult getGameResult() {
-		if (userAItem.isWinner()) {
+		if (humanUserItem.isWinner()) {
 			return GameResult.WON; 
-		} else if (userBItem.isWinner()) {
+		} else if (aiUserItem.isWinner()) {
 			return GameResult.LOST;
 		}
 		return GameResult.TIE;
@@ -45,9 +45,9 @@ public class Selections {
 		if (GameResult.TIE.equals(gameResult)) {
 			return null;
 		} else if (GameResult.WON.equals(gameResult)){
-			return userAItem;
+			return humanUserItem;
 		} else {
-			return userBItem;
+			return aiUserItem;
 		}		
 	}
 	

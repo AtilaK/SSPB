@@ -14,12 +14,12 @@ public class RockScissorRule {
 
     @Condition
     public boolean evaluate(@Fact("selections") Selections selections) {
-    	 return selections.getUserAItem() instanceof Rock && selections.getUserBItem() instanceof Scissor;
+    	 return selections.getHumanUserItem() instanceof Rock && selections.getAIUserItem() instanceof Scissor;
     }
     
     @Action
     public void decide(@Fact("selections") Selections selections) {
-    	selections.getUserAItem().setWinner(true);
+    	selections.getHumanUserItem().setWinner(true);
         System.out.println("Rock beats scissor: User A wins!");
     }
 	

@@ -88,8 +88,8 @@ public class PlayController {
 		
 		GameResult gameResult = selections.getGameResult();
 		
-		String userAShapeString = selections.getUserAItem().getShape().toString();		
-		String userBShapeString = selections.getUserBItem().getShape().toString();
+		String userAShapeString = selections.getHumanUserItem().getShape().toString();		
+		String userBShapeString = selections.getAIUserItem().getShape().toString();
 		
 		if (GameResult.TIE.equals(gameResult)) {
 			humanUserResponse.setResultShort(GameResult.TIE.toString());

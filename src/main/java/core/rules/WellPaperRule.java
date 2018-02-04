@@ -14,12 +14,12 @@ public class WellPaperRule {
 
     @Condition
     public boolean evaluate(@Fact("selections") Selections selections) {
-    	 return selections.getUserAItem() instanceof Well && selections.getUserBItem() instanceof Paper;
+    	 return selections.getHumanUserItem() instanceof Well && selections.getAIUserItem() instanceof Paper;
     }
     
     @Action
     public void decide(@Fact("selections") Selections selections) {
-    	selections.getUserBItem().setWinner(true);
+    	selections.getAIUserItem().setWinner(true);
         System.out.println("Paper beats well: User B wins!");
     }
 	

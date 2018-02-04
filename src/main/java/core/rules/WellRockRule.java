@@ -14,12 +14,12 @@ public class WellRockRule {
 
     @Condition
     public boolean evaluate(@Fact("selections") Selections selections) {
-    	 return selections.getUserAItem() instanceof Well && selections.getUserBItem() instanceof Rock;
+    	 return selections.getHumanUserItem() instanceof Well && selections.getAIUserItem() instanceof Rock;
     }
     
     @Action
     public void decide(@Fact("selections") Selections selections) {
-    	selections.getUserAItem().setWinner(true);
+    	selections.getHumanUserItem().setWinner(true);
         System.out.println("Well beats rock: User A wins!");
     }
 	

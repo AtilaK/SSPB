@@ -14,12 +14,12 @@ public class PaperScissorRule {
 
     @Condition
     public boolean evaluate(@Fact("selections") Selections selections) {
-    	 return selections.getUserAItem() instanceof Paper && selections.getUserBItem() instanceof Scissor;
+    	 return selections.getHumanUserItem() instanceof Paper && selections.getAIUserItem() instanceof Scissor;
     }
     
     @Action
     public void decide(@Fact("selections") Selections selections) {
-    	selections.getUserBItem().setWinner(true);
+    	selections.getAIUserItem().setWinner(true);
         System.out.println("Scissor beats paper: User B wins!");
     }
 	

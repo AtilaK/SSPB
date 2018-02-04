@@ -107,17 +107,17 @@ public class EnhancedDecisionMakerTest {
 	
 	
 	private void assertTie(Selections selections) {
-		assertThat(selections.getUserAItem().isWinner(), is(false));
-        assertThat(selections.getUserBItem().isWinner(), is(false));		
+		assertThat(selections.getHumanUserItem().isWinner(), is(false));
+        assertThat(selections.getAIUserItem().isWinner(), is(false));		
 	}
 
 	private void userAWinnerAndUserBLooser(Selections selections) {
-		assertThat(selections.getUserAItem().isWinner(), is(true));
-        assertThat(selections.getUserBItem().isWinner(), is(false));
+		assertThat(selections.getHumanUserItem().isWinner(), is(true));
+        assertThat(selections.getAIUserItem().isWinner(), is(false));
 	}	
 	
 	private void userBWinnerAndUserALooser(Selections selections) {
-		assertThat(selections.getUserBItem().isWinner(), is(true));
-        assertThat(selections.getUserAItem().isWinner(), is(false));
+		assertThat(selections.getAIUserItem().isWinner(), is(true));
+        assertThat(selections.getHumanUserItem().isWinner(), is(false));
 	}	
 }

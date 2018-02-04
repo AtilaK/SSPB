@@ -12,7 +12,7 @@ public class TieRule {
 
     @Condition
     public boolean evaluate(@Fact("selections") Selections selections) {
-    	 return selections.getUserAItem().getClass().equals(selections.getUserBItem().getClass());
+    	 return selections.getHumanUserItem().getClass().equals(selections.getAIUserItem().getClass());
     }
     
     @Action
