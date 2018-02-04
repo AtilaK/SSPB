@@ -44,10 +44,8 @@ public class PlayController {
     	if (gameMode == null) {
     		throw new IllegalArgumentException(environment.getProperty("gameMode.invalid"));
     	}
-
-    	if (gameMode.equals(GameMode.ENHANCED)) {
-    		game.setToEnhancedMode();
-    	}
+    	
+    	game.setGameMode(gameMode);
     	
      	Shape shape = analyseShape(userRequest, gameMode);
     	
@@ -95,16 +93,16 @@ public class PlayController {
 		
 		if (GameResult.TIE.equals(gameResult)) {
 			humanUserResponse.setResultShort(GameResult.TIE.toString());
-			humanUserResponse.setResultDetailed(environment.getProperty("resultMessage.tie")+":"+
-					userAShapeString+" --- "+userBShapeString);
+			humanUserResponse.setResultDetailed(environment.getProperty("resultMessage.tie")+"  >>>"+
+					" ["+userAShapeString+"] "+" --- "+" ["+userBShapeString+"] ");
 		} else if (GameResult.WON.equals(gameResult)) {
 			humanUserResponse.setResultShort(GameResult.WON.toString());
-			humanUserResponse.setResultDetailed(environment.getProperty("resultMessage.win")+":"+
-					userAShapeString+" --- "+userBShapeString);			
+			humanUserResponse.setResultDetailed(environment.getProperty("resultMessage.win")+"  >>>"+
+					" ["+userAShapeString+"] "+" --- "+" ["+userBShapeString+"] ");			
 		} else {
 			humanUserResponse.setResultShort(GameResult.LOST.toString());
-			humanUserResponse.setResultDetailed(environment.getProperty("resultMessage.lost")+":"+
-					userAShapeString+" --- "+userBShapeString);	
+			humanUserResponse.setResultDetailed(environment.getProperty("resultMessage.lost")+"  >>>"+
+					" ["+userAShapeString+"] "+" --- "+" ["+userBShapeString+"] ");	
 		}		
 		
 		humanUserResponse.setYourShape(userAShapeString);;

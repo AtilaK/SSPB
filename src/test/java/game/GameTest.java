@@ -15,7 +15,7 @@ public class GameTest {
 	@Test
     public void getPlayTestEnhanced() {
 		Game game = new Game();
-		game.setToEnhancedMode();
+		game.setGameMode(GameMode.ENHANCED);
 		game.setUserItemForShape(Shape.ROCK);
 		System.out.println(game.play());
 	}

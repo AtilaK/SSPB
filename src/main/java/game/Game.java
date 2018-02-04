@@ -26,8 +26,8 @@ public class Game {
 		this.gameMode = GameMode.BASIC;		
 	}
 	
-	public void setToEnhancedMode () {
-		this.gameMode = GameMode.ENHANCED;
+	public void setGameMode (GameMode gameMode) {
+		this.gameMode = gameMode;
 	}
 	
 	public void setUserItemForShape (Shape shape) {
