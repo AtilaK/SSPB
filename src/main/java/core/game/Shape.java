@@ -1,7 +1,7 @@
 package core.game;
 
 public enum Shape {
-	ROCK("stein"), SCISSOR("schere"), PAPER("papier"), WELL("brunnen");
+	ROCK("Stein"), SCISSOR("Schere"), PAPER("Papier"), WELL("Brunnen");
 	
 	private String shape;
 	

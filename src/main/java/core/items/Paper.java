@@ -4,7 +4,7 @@ import core.game.Shape;
 
 public class Paper extends Item {
 
-	public Paper () {
+	protected Paper () {
 		this.setShape(Shape.PAPER);
 	}
 	

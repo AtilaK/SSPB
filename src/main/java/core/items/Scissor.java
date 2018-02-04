@@ -4,7 +4,7 @@ import core.game.Shape;
 
 public class Scissor extends Item {
 
-	public Scissor () {
+	protected Scissor () {
 		this.setShape(Shape.SCISSOR);
 	}
 	

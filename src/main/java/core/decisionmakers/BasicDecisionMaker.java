@@ -45,16 +45,13 @@ public class BasicDecisionMaker extends DecisionMaker {
 		return instance;
 	}
 		
-	public boolean decide(Selections selections) {
+	public void decide(Selections selections) {
 		
 		facts.put("selections", selections);
 	    RulesEngine rulesEngine = new DefaultRulesEngine();
-	    rulesEngine.fire(rules, facts);
-	    
+	    rulesEngine.fire(rules, facts);	    
 	    facts.remove("selections");
-	   
-	    // TODO should return false if decision making not possible!
-	    return true;
+
 	}
 
 }

@@ -7,6 +7,8 @@ import org.junit.Test;
 
 import core.decisionmakers.BasicDecisionMaker;
 import core.game.Selections;
+import core.game.Shape;
+import core.items.ItemFactory;
 import core.items.Paper;
 import core.items.Rock;
 import core.items.Scissor;
@@ -15,63 +17,63 @@ public class BasicDecisionMakerTest {
 
 	@Test
     public void testScissorRock() {
-		Selections selections = new Selections(new Scissor(), new Rock());
+		Selections selections = new Selections(ItemFactory.getItemWithShape(Shape.SCISSOR), ItemFactory.getItemWithShape(Shape.ROCK));
         BasicDecisionMaker.getInstance().decide(selections);       
         userBWinnerAndUserALooser(selections);  
 	}
 	
 	@Test
     public void testRockScissor() {
-		Selections selections = new Selections(new Rock(), new Scissor());
+		Selections selections = new Selections(ItemFactory.getItemWithShape(Shape.ROCK), ItemFactory.getItemWithShape(Shape.SCISSOR));
         BasicDecisionMaker.getInstance().decide(selections);       
         userAWinnerAndUserBLooser(selections);
 	}	
 
 	@Test
     public void testPaperRock() {
-		Selections selections = new Selections(new Paper(), new Rock());
+		Selections selections = new Selections(ItemFactory.getItemWithShape(Shape.PAPER), ItemFactory.getItemWithShape(Shape.ROCK));
         BasicDecisionMaker.getInstance().decide(selections);       
         userAWinnerAndUserBLooser(selections);
 	}
 	
 	@Test
     public void testRockPaper() {
-		Selections selections = new Selections(new Rock(), new Paper());
+		Selections selections = new Selections(ItemFactory.getItemWithShape(Shape.ROCK), ItemFactory.getItemWithShape(Shape.PAPER));
         BasicDecisionMaker.getInstance().decide(selections);       
         userBWinnerAndUserALooser(selections);
 	}
 	
 	@Test
     public void testScissorPaper() {
-		Selections selections = new Selections(new Scissor(), new Paper());
+		Selections selections = new Selections(ItemFactory.getItemWithShape(Shape.SCISSOR), ItemFactory.getItemWithShape(Shape.PAPER));
         BasicDecisionMaker.getInstance().decide(selections);       
         userAWinnerAndUserBLooser(selections);   
 	}
 	
 	@Test
     public void testPaperScissor() {
-		Selections selections = new Selections(new Paper(), new Scissor());
+		Selections selections = new Selections(ItemFactory.getItemWithShape(Shape.PAPER), ItemFactory.getItemWithShape(Shape.SCISSOR));
         BasicDecisionMaker.getInstance().decide(selections);       
         userBWinnerAndUserALooser(selections);  
 	}
 	
 	@Test
     public void testPaperPaper() {
-		Selections selections = new Selections(new Paper(), new Paper());
+		Selections selections = new Selections(ItemFactory.getItemWithShape(Shape.PAPER), ItemFactory.getItemWithShape(Shape.PAPER));
         BasicDecisionMaker.getInstance().decide(selections);       
         assertTie(selections);  
 	}
 	
 	@Test
     public void testRockRock() {
-		Selections selections = new Selections(new Paper(), new Paper());
+		Selections selections = new Selections(ItemFactory.getItemWithShape(Shape.ROCK), ItemFactory.getItemWithShape(Shape.ROCK));
         BasicDecisionMaker.getInstance().decide(selections);       
         assertTie(selections);  
 	}
 	
 	@Test
     public void testScissorScissor() {
-		Selections selections = new Selections(new Scissor(), new Scissor());
+		Selections selections = new Selections(ItemFactory.getItemWithShape(Shape.SCISSOR), ItemFactory.getItemWithShape(Shape.SCISSOR));
         BasicDecisionMaker.getInstance().decide(selections);       
         assertTie(selections);  
 	}

@@ -14,5 +14,5 @@ public abstract class DecisionMaker {
 		this.isEnhancedDecisionMaker = isEnhancedDecisionMaker;
 	}
 	
-	public abstract boolean decide(Selections selections);
+	public abstract void decide(Selections selections);
 }

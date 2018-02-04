@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 import core.game.Game;
 import core.game.GameMode;
 import core.game.GameResult;
-import core.game.Selections;
 import core.game.Shape;
 
 @RestController
@@ -53,18 +52,20 @@ public class PlayController {
     		throw new IllegalArgumentException(environment.getProperty("shape.invalid")); 		
     	}
 		    	
-    	game.setUserItemForShape(shape);
+    	game.setHumanUserItemForShape(shape);
    		
-    	Selections selections = game.play();
+    	game.play();
     	
-    	return createPlayResponse(selections, gameMode);    			
+    	return createPlayResponse(game);    			
     }
 
 	private GameMode analyseGameMode(PlayRequest userRequest) {
 		if (GameMode.BASIC.toString().equals(userRequest.getGameMode())) {
     		return GameMode.BASIC;
+    		
     	} else if (GameMode.ENHANCED.toString().equals(userRequest.getGameMode())) {
     		return GameMode.ENHANCED;
+    		
     	}
 		return null;
 	}
@@ -82,14 +83,14 @@ public class PlayController {
 		return null;
 	}
 
-	private PlayResponse createPlayResponse(Selections selections, GameMode gameMode) {
+	private PlayResponse createPlayResponse(Game game) {
 		
 		PlayResponse playResponse = new PlayResponse();
 		
-		GameResult gameResult = selections.getGameResult();
+		GameResult gameResult = game.getGameResult();
 		
-		String humanUserShape = selections.getHumanUserItem().getShape().toString();		
-		String aiUserShape = selections.getAIUserItem().getShape().toString();
+		String humanUserShape = game.getHumanUserItem().getShape().toString();		
+		String aiUserShape = game.getAIUserItem().getShape().toString();
 		
 		if (GameResult.TIE.equals(gameResult)) {
 			playResponse.setResultShort(GameResult.TIE.toString());
@@ -106,7 +107,7 @@ public class PlayController {
 		
 		playResponse.setYourShape(humanUserShape);;
 		playResponse.setOpponentShape(aiUserShape);;
-		playResponse.setGameMode(gameMode.toString());
+		playResponse.setGameMode(game.getGameMode().toString());
 		
 		return playResponse;
 	}

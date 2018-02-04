@@ -3,21 +3,21 @@ A coding kata
 
 # sample client calls
 
-curl -X POST -H "Content-Type: application/json" http://localhost:8080/play -d '{"shape": "stein", "gameMode": "klassik"}'
+curl -X POST -H "Content-Type: application/json" http://localhost:8080/play -d '{"shape": "stein", "gameMode": "Klassik"}'
 
-curl -X POST -H "Content-Type: application/json" http://localhost:8080/play -d '{"shape": "schere", "gameMode": "klassik"}'
+curl -X POST -H "Content-Type: application/json" http://localhost:8080/play -d '{"shape": "Schere", "gameMode": "Klassik"}'
 
-curl -X POST -H "Content-Type: application/json" http://localhost:8080/play -d '{"shape": "papier", "gameMode": "klassik"}'
+curl -X POST -H "Content-Type: application/json" http://localhost:8080/play -d '{"shape": "Papier", "gameMode": "Klassik"}'
 
-curl -X POST -H "Content-Type: application/json" http://localhost:8080/play -d '{"shape": "brunnen", "gameMode": "klassik"}'
+curl -X POST -H "Content-Type: application/json" http://localhost:8080/play -d '{"shape": "Brunnen", "gameMode": "Klassik"}'
 
-curl -X POST -H "Content-Type: application/json" http://localhost:8080/play -d '{"shape": "brunnen", "gameMode": "fortgeschritten"}'
+curl -X POST -H "Content-Type: application/json" http://localhost:8080/play -d '{"shape": "Brunnen", "gameMode": "Fortgeschritten"}'
 
-curl -X POST -H "Content-Type: application/json" http://localhost:8080/play -d '{"shape": "stein", "gameMode": "fortgeschritten"}'
+curl -X POST -H "Content-Type: application/json" http://localhost:8080/play -d '{"shape": "Stein", "gameMode": "Fortgeschritten"}'
 
-curl -X POST -H "Content-Type: application/json" http://localhost:8080/play -d '{"shape": "blabla", "gameMode": "fortgeschritten"}'
+curl -X POST -H "Content-Type: application/json" http://localhost:8080/play -d '{"shape": "blabla", "gameMode": "Fortgeschritten"}'
 
-curl -X POST -H "Content-Type: application/json" http://localhost:8080/play -d '{"shape": "stein", "gameMode": "blabla"}'
+curl -X POST -H "Content-Type: application/json" http://localhost:8080/play -d '{"shape": "Stein", "gameMode": "blabla"}'
 
 # misc
 

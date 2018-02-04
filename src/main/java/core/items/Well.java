@@ -4,7 +4,7 @@ import core.game.Shape;
 
 public class Well extends Item {
 
-	public Well () {
+	protected Well () {
 		this.setShape(Shape.WELL);
 	}
 	

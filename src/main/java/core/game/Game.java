@@ -9,51 +9,70 @@ import core.decisionmakers.DecisionMaker;
 import core.decisionmakers.EnhancedDecisionMaker;
 import core.items.Item;
 import core.items.ItemFactory;
-import core.items.Paper;
-import core.items.Rock;
-import core.items.Scissor;
-import core.items.Well;
 
 @Component
 public class Game {
 	
 	private GameMode gameMode;
-	private Item userItem;	
-	private Item aiItem;	
+	private Item humanUserItem;	
+	private Item aiUserItem;	
 	private DecisionMaker decisionMaker;
+	private Selections selections;
 	
 	public Game() {
 		this.gameMode = GameMode.BASIC;		
 	}
 	
-	public void setGameMode (GameMode gameMode) {
+	public GameMode getGameMode() {
+		return gameMode;
+	}
+	
+	public void setGameMode(GameMode gameMode) {
 		this.gameMode = gameMode;
 	}
 	
-	public void setUserItemForShape (Shape shape) {
-		userItem = ItemFactory.getItemWithShape(shape);
-	}
-
-	public Item getUserItem() {
-		return userItem;
+	public Item getHumanUserItem() {
+		return humanUserItem;
 	}
 	
-	public Selections play () {
+	public Item getAIUserItem() {
+		return aiUserItem;
+	}	
+	
+	public void setHumanUserItemForShape(Shape shape) {
+		if (GameMode.BASIC.equals(gameMode) && Shape.WELL.equals(shape)) {
+			throw new IllegalArgumentException("Shape WELL only allowed in enhanced mode!!!");
+		}
+		humanUserItem = ItemFactory.getItemWithShape(shape);
+	}
+
+	public GameResult getGameResult() {
+		
+		if (selections == null) {
+			return null;			
+		} else {
+			return selections.getGameResult();
+		}
+	}
+	
+	public void play () {
     	
-    	this.aiItem = null;
+    	this.aiUserItem = null;
     	
-    	if (gameMode.equals(GameMode.BASIC)) {    	
+    	if (GameMode.BASIC.equals(gameMode)) {    	
     		decisionMaker = BasicDecisionMaker.getInstance();
-    		this.aiItem = getRandomItem(4); 
+    		this.aiUserItem = getRandomItem(GameMode.BASIC); 
     		
-    	} if (gameMode.equals(GameMode.ENHANCED)) {  
+    	} if (GameMode.ENHANCED.equals(gameMode)) {  
     		decisionMaker = EnhancedDecisionMaker.getInstance();
-    		this.aiItem = getRandomItem(5);
+    		this.aiUserItem = getRandomItem(GameMode.ENHANCED);
+    		
     	}
     	
-		Selections selections = new Selections(userItem, aiItem);
+		this.selections = new Selections(humanUserItem, aiUserItem);
+		
 		decisionMaker.decide(selections);		
-		return selections;
+		
 	}
 	
 	/**
@@ -61,21 +80,27 @@ public class Game {
 	 * bound = upper bound exclusive: 4 for basic game and 5 for enhanced game
 	 * @return
 	 */
-	private Item getRandomItem (int bound) {
+	private Item getRandomItem (GameMode gameMode) {
+		
+		int bound = 4;
+		
+		if (GameMode.ENHANCED.equals(gameMode)) {
+			bound = 5;	
+		}
 		
 		int randomNum = ThreadLocalRandom.current().nextInt(1, bound);
 		
 		if (randomNum == 1) {
-			return new Rock();
+			return ItemFactory.getItemWithShape(Shape.ROCK);
 		} else if (randomNum == 2) {
-			return new Scissor();
+			return ItemFactory.getItemWithShape(Shape.SCISSOR);
 		} else if (randomNum == 3) {
-			return new Paper();
+			return ItemFactory.getItemWithShape(Shape.PAPER);
 		} else if (randomNum == 4) {
-			return new Well();
+			return ItemFactory.getItemWithShape(Shape.WELL);
 		}
 		
-		return new Rock();
+		return ItemFactory.getItemWithShape(Shape.ROCK);
 	}
 	
 }

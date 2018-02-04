@@ -4,7 +4,7 @@ import core.game.Shape;
 
 public class Rock extends Item {
 	
-	public Rock () {
+	protected Rock () {
 		this.setShape(Shape.ROCK);
 	}
 }

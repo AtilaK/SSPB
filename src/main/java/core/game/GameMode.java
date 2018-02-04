@@ -1,7 +1,7 @@
 package core.game;
 
 public enum GameMode {
-	BASIC("klassik"), ENHANCED("fortgeschritten");
+	BASIC("Klassik"), ENHANCED("Fortgeschritten");
 	
 	private String mode;
 	
