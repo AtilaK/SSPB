@@ -7,12 +7,12 @@ import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Test;
 
-import decisionmakers.BasicDecisionMaker;
-import game.GameResult;
-import game.Selections;
-import items.Paper;
-import items.Rock;
-import items.Scissor;
+import core.decisionmakers.BasicDecisionMaker;
+import core.game.GameResult;
+import core.game.Selections;
+import core.items.Paper;
+import core.items.Rock;
+import core.items.Scissor;
 
 public class SelectionsTest {
 

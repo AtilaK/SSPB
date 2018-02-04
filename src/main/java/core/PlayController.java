@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import game.Game;
-import game.GameMode;
-import game.GameResult;
-import game.Selections;
-import game.Shape;
+import core.game.Game;
+import core.game.GameMode;
+import core.game.GameResult;
+import core.game.Selections;
+import core.game.Shape;
 
 @RestController
 @ComponentScan("game")
@@ -37,7 +37,7 @@ public class PlayController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/play", produces = APPLICATION_JSON_VALUE)
-    public @ResponseBody HumanUserResponse play(@RequestBody HumanUserRequest userRequest) {
+    public @ResponseBody PlayResponse play(@RequestBody PlayRequest userRequest) {
     	
      	GameMode gameMode = analyseGameMode(userRequest);
 	  	
@@ -60,7 +60,7 @@ public class PlayController {
     	return responseWithGameResult(selections, gameMode);    			
     }
 
-	private GameMode analyseGameMode(HumanUserRequest userRequest) {
+	private GameMode analyseGameMode(PlayRequest userRequest) {
 		if (GameMode.BASIC.toString().equals(userRequest.getGameMode())) {
     		return GameMode.BASIC;
     	} else if (GameMode.ENHANCED.toString().equals(userRequest.getGameMode())) {
@@ -69,7 +69,7 @@ public class PlayController {
 		return null;
 	}
     
-	private Shape analyseShape(HumanUserRequest userRequest, GameMode gameMode) {
+	private Shape analyseShape(PlayRequest userRequest, GameMode gameMode) {
 		if (Shape.ROCK.toString().equals(userRequest.getShape())) {
 			return Shape.ROCK;
 		} else if (Shape.SCISSOR.toString().equals(userRequest.getShape())) {
@@ -82,9 +82,9 @@ public class PlayController {
 		return null;
 	}
 
-	private HumanUserResponse responseWithGameResult(Selections selections, GameMode gameMode) {
+	private PlayResponse responseWithGameResult(Selections selections, GameMode gameMode) {
 		
-		HumanUserResponse humanUserResponse = new HumanUserResponse();
+		PlayResponse humanUserResponse = new PlayResponse();
 		
 		GameResult gameResult = selections.getGameResult();
 		
