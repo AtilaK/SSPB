@@ -35,5 +35,10 @@ public class PlayRequest {
 	public void setGameMode(String gameMode) {
 		this.gameMode = gameMode;
 	}
+
+	@Override
+	public String toString() {
+		return "PlayRequest [shape=" + shape + ", gameMode=" + gameMode + "]";
+	}
 	
 }

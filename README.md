@@ -5,12 +5,11 @@ A coding kata
 
 - add tests for playcontroller
 - add check for rules: Not both users can win!
-- logging missing
 - swagger for REST API?
 
 # sample client calls
 
-curl -X POST -H "Content-Type: application/json" http://localhost:8080/play -d '{"shape": "stein", "gameMode": "Klassik"}'
+curl -X POST -H "Content-Type: application/json" http://localhost:8080/play -d '{"shape": "Stein", "gameMode": "Klassik"}'
 
 curl -X POST -H "Content-Type: application/json" http://localhost:8080/play -d '{"shape": "Schere", "gameMode": "Klassik"}'
 

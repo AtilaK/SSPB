@@ -6,6 +6,8 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
@@ -30,10 +32,14 @@ public class PlayController {
 	
 	@Autowired Game game;
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(PlayController.class);
+	
     @RequestMapping(method = RequestMethod.POST, value = "/play", produces = APPLICATION_JSON_VALUE)
-    public @ResponseBody PlayResponse play(@RequestBody PlayRequest userRequest) {
+    public @ResponseBody PlayResponse play(@RequestBody PlayRequest playRequest) {
     	
-     	GameMode gameMode = analyseGameMode(userRequest);
+    	LOGGER.debug(playRequest.toString());
+    	
+     	GameMode gameMode = analyseGameMode(playRequest);
 	  	
     	if (gameMode == null) {
     		throw new IllegalArgumentException(environment.getProperty("gameMode.invalid"));
@@ -41,7 +47,7 @@ public class PlayController {
     	
     	game.setGameMode(gameMode);
     	
-     	Shape shape = analyseShape(userRequest, gameMode);
+     	Shape shape = analyseShape(playRequest, gameMode);
     	
     	if (shape == null) {
     		throw new IllegalArgumentException(environment.getProperty("shape.invalid")); 		

@@ -4,6 +4,8 @@ import org.jeasy.rules.annotation.Action;
 import org.jeasy.rules.annotation.Condition;
 import org.jeasy.rules.annotation.Fact;
 import org.jeasy.rules.annotation.Rule;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import core.game.Selections;
 import core.items.Scissor;
@@ -12,6 +14,8 @@ import core.items.Well;
 @Rule(name = "Well scissor rule", description = "well beats scissor" )
 public class WellScissorRule {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(WellScissorRule.class);
+	
     @Condition
     public boolean evaluate(@Fact("selections") Selections selections) {
     	 return selections.getHumanUserItem() instanceof Well && selections.getAIUserItem() instanceof Scissor;
@@ -20,7 +24,7 @@ public class WellScissorRule {
     @Action
     public void decide(@Fact("selections") Selections selections) {
     	selections.getHumanUserItem().setWinner(true);
-        System.out.println("Well beats scissor: User A wins!");
+    	LOGGER.info("Well beats scissor: User A wins!");
     }
 	
 }
