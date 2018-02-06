@@ -9,9 +9,6 @@ import core.decisionmakers.BasicDecisionMaker;
 import core.game.Selections;
 import core.game.Shape;
 import core.items.ItemFactory;
-import core.items.Paper;
-import core.items.Rock;
-import core.items.Scissor;
 
 public class BasicDecisionMakerTest {
 
