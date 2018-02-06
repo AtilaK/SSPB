@@ -12,7 +12,7 @@ import core.items.Paper;
 import core.items.Well;
 
 @Rule(name = "paper well rule", description = "paper beats well" )
-public class PaperWellRule {
+public class PaperWellRule extends GameRule {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(PaperWellRule.class);
 	
@@ -23,7 +23,7 @@ public class PaperWellRule {
     
     @Action
     public void decide(@Fact("selections") Selections selections) {
-    	selections.getHumanUserItem().setWinner(true);
+    	setHumanUserItemWinner(selections);
         LOGGER.info("Paper beats well: User A wins!");
     }
 	

@@ -41,7 +41,7 @@ public class Game {
 	
 	public void setHumanUserItemForShape(Shape shape) {
 		if (GameMode.BASIC.equals(gameMode) && Shape.WELL.equals(shape)) {
-			throw new IllegalArgumentException("Shape WELL only allowed in enhanced mode!!!");
+			throw new IllegalArgumentException("Shape WELL only allowed in enhanced mode!");
 		}
 		humanUserItem = ItemFactory.getItemWithShape(shape);
 	}

@@ -12,7 +12,7 @@ import core.items.Rock;
 import core.items.Well;
 
 @Rule(name = "well rock rule", description = "well beats rock" )
-public class WellRockRule {
+public class WellRockRule extends GameRule {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(WellRockRule.class);
 	
@@ -23,7 +23,7 @@ public class WellRockRule {
     
     @Action
     public void decide(@Fact("selections") Selections selections) {
-    	selections.getHumanUserItem().setWinner(true);
+    	setHumanUserItemWinner(selections);
     	LOGGER.info("Well beats rock: User A wins!");
     }
 	

@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import core.game.Selections;
 
 @Rule(name = "tie rule", description = "tie situation" )
-public class TieRule {
+public class TieRule extends GameRule {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(TieRule.class);
 	
@@ -20,7 +20,7 @@ public class TieRule {
     }
     
     @Action
-    public void decide() {
+    public void decide(@Fact("selections") Selections selections) {
         LOGGER.info("The game is tied: No one wins!");
     }
 	

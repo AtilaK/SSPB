@@ -42,7 +42,9 @@ public class PlayController {
      	GameMode gameMode = analyseGameMode(playRequest);
 	  	
     	if (gameMode == null) {
-    		throw new IllegalArgumentException(environment.getProperty("gameMode.invalid"));
+    		String message = environment.getProperty("gameMode.invalid");
+    		LOGGER.debug(message);
+    		throw new IllegalArgumentException(message); 		
     	}
     	
     	game.setGameMode(gameMode);
@@ -50,7 +52,9 @@ public class PlayController {
      	Shape shape = analyseShape(playRequest, gameMode);
     	
     	if (shape == null) {
-    		throw new IllegalArgumentException(environment.getProperty("shape.invalid")); 		
+    		String message = environment.getProperty("shape.invalid");
+    		LOGGER.debug(message);
+    		throw new IllegalArgumentException(message); 		
     	}
 		    	
     	game.setHumanUserItemForShape(shape);
@@ -74,12 +78,16 @@ public class PlayController {
 	private Shape analyseShape(PlayRequest userRequest, GameMode gameMode) {
 		if (Shape.ROCK.toString().equals(userRequest.getShape())) {
 			return Shape.ROCK;
+			
 		} else if (Shape.SCISSOR.toString().equals(userRequest.getShape())) {
 			return Shape.SCISSOR;
+			
 		} else if (Shape.PAPER.toString().equals(userRequest.getShape())) {
 			return Shape.PAPER;
+			
 		} else if (gameMode.equals(GameMode.ENHANCED) && Shape.WELL.toString().equals(userRequest.getShape())) {
 			return Shape.WELL;
+			
 		}
 		return null;
 	}

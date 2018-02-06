@@ -12,7 +12,7 @@ import core.items.Paper;
 import core.items.Scissor;
 
 @Rule(name = "scissor paper rule", description = "scissor beats paper" )
-public class ScissorPaperRule {
+public class ScissorPaperRule extends GameRule {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ScissorPaperRule.class);
 	
@@ -23,7 +23,7 @@ public class ScissorPaperRule {
     
     @Action
     public void decide(@Fact("selections") Selections selections) {
-    	selections.getHumanUserItem().setWinner(true);
+    	setHumanUserItemWinner(selections);
         LOGGER.info("Scissor beats paper: User A wins!");
     }
 	

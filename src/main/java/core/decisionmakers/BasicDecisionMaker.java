@@ -49,7 +49,8 @@ public class BasicDecisionMaker extends DecisionMaker {
 		
 		facts.put("selections", selections);
 	    RulesEngine rulesEngine = new DefaultRulesEngine();
-	    rulesEngine.fire(rules, facts);	    
+		rulesEngine.fire(rules, facts);
+		    
 	    facts.remove("selections");
 
 	}

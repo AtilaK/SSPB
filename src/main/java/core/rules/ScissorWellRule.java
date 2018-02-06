@@ -12,7 +12,7 @@ import core.items.Scissor;
 import core.items.Well;
 
 @Rule(name = "Scissor well rule", description = "well beats scissor" )
-public class ScissorWellRule {
+public class ScissorWellRule extends GameRule {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ScissorWellRule.class);
 	
@@ -23,7 +23,7 @@ public class ScissorWellRule {
     
     @Action
     public void decide(@Fact("selections") Selections selections) {
-    	selections.getAIUserItem().setWinner(true);
+    	setAIUserItemWinner(selections);
         LOGGER.info("Well beats c: User B wins!");
     }
 	

@@ -11,10 +11,15 @@ import core.items.Item;
 
 public class GameTest {
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
     public void setHumanUserItemForShapeInvalidShape() {
 		Game game = new Game();
-		game.setHumanUserItemForShape(Shape.WELL);
+		try {
+			game.setHumanUserItemForShape(Shape.WELL);
+		} catch (IllegalArgumentException expected) {
+			assertThat("Shape WELL only allowed in enhanced mode!", is(expected.getMessage()));
+		}
+					
 	}
 	
 	@Test

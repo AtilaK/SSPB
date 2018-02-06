@@ -4,7 +4,6 @@ A coding kata
 # ToDo
 
 - add tests for playcontroller
-- add check for rules: Not both users can win!
 - swagger for REST API?
 
 # sample client calls

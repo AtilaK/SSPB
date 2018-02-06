@@ -12,7 +12,7 @@ import core.items.Rock;
 import core.items.Scissor;
 
 @Rule(name = "scissor rock rule", description = "rock beats scissor" )
-public class ScissorRockRule {
+public class ScissorRockRule extends GameRule {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(ScissorRockRule.class);
 
@@ -23,7 +23,7 @@ public class ScissorRockRule {
     
     @Action
     public void decide(@Fact("selections") Selections selections) {
-    	selections.getAIUserItem().setWinner(true);
+    	setAIUserItemWinner(selections);
     	LOGGER.info("rock beats scissor: User B wins!");
     }
 	
