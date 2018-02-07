@@ -3,8 +3,9 @@ A coding kata
 
 # ToDo
 
-- add tests for playcontroller
+- add more tests for playcontroller
 - swagger for REST API?
+- add security 
 
 # sample client calls
 
