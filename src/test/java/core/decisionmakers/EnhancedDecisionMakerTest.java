@@ -12,91 +12,91 @@ import core.items.ItemFactory;
 public class EnhancedDecisionMakerTest {
 
 	@Test
-    public void testPaperRock() {
+    public void decidePaperRockWinnerA() {
 		Selections selections = new Selections(ItemFactory.getItemWithShape(Shape.PAPER), ItemFactory.getItemWithShape(Shape.ROCK));
 		EnhancedDecisionMaker.getInstance().decide(selections);       
         userAWinnerAndUserBLooser(selections);
 	}
 	
 	@Test
-    public void testPaperScissor() {
+    public void decidePaperScissorWinnerB() {
 		Selections selections = new Selections(ItemFactory.getItemWithShape(Shape.PAPER), ItemFactory.getItemWithShape(Shape.SCISSOR));
 		EnhancedDecisionMaker.getInstance().decide(selections);       
         userBWinnerAndUserALooser(selections);  
 	}
 	
 	@Test
-    public void testPaperWell() {
+    public void decidePaperWellWinnerA() {
 		Selections selections = new Selections(ItemFactory.getItemWithShape(Shape.PAPER), ItemFactory.getItemWithShape(Shape.WELL));
 		EnhancedDecisionMaker.getInstance().decide(selections);       
         userAWinnerAndUserBLooser(selections);  
 	}
 	
 	@Test
-    public void testRockScissor() {
+    public void decideRockScissorWinnerA() {
 		Selections selections = new Selections(ItemFactory.getItemWithShape(Shape.ROCK), ItemFactory.getItemWithShape(Shape.SCISSOR));
 		EnhancedDecisionMaker.getInstance().decide(selections);       
         userAWinnerAndUserBLooser(selections);
 	}	
 
 	@Test
-    public void testRockPaper() {
+    public void decideRockPaperWinnerB() {
 		Selections selections = new Selections(ItemFactory.getItemWithShape(Shape.ROCK), ItemFactory.getItemWithShape(Shape.PAPER));
 		EnhancedDecisionMaker.getInstance().decide(selections);       
         userBWinnerAndUserALooser(selections);
 	}
 	
 	@Test
-    public void testRockWell() {
+    public void decideRockWellWinnerB() {
 		Selections selections = new Selections(ItemFactory.getItemWithShape(Shape.ROCK), ItemFactory.getItemWithShape(Shape.WELL));
 		EnhancedDecisionMaker.getInstance().decide(selections);       
         userBWinnerAndUserALooser(selections);
 	}	
 	
 	@Test
-    public void testScissorRock() {
+    public void decideScissorRockWinnerB() {
 		Selections selections = new Selections(ItemFactory.getItemWithShape(Shape.SCISSOR), ItemFactory.getItemWithShape(Shape.ROCK));
         EnhancedDecisionMaker.getInstance().decide(selections);       
         userBWinnerAndUserALooser(selections);  
 	}
 	
 	@Test
-    public void testScissorPaper() {
+    public void decideScissorPaperWinnerA() {
 		Selections selections = new Selections(ItemFactory.getItemWithShape(Shape.SCISSOR), ItemFactory.getItemWithShape(Shape.PAPER));
 		EnhancedDecisionMaker.getInstance().decide(selections);       
         userAWinnerAndUserBLooser(selections);   
 	}
 	
 	@Test
-    public void testScissorWell() {
+    public void decideScissorWellWinnerB() {
 		Selections selections = new Selections(ItemFactory.getItemWithShape(Shape.SCISSOR), ItemFactory.getItemWithShape(Shape.WELL));
         EnhancedDecisionMaker.getInstance().decide(selections);       
         userBWinnerAndUserALooser(selections);  
 	}
 	
 	@Test
-    public void testPaperPaper() {
+    public void decidePaperPaperTie() {
 		Selections selections = new Selections(ItemFactory.getItemWithShape(Shape.PAPER), ItemFactory.getItemWithShape(Shape.PAPER));
 		EnhancedDecisionMaker.getInstance().decide(selections);       
         assertTie(selections);  
 	}
 	
 	@Test
-    public void testRockRock() {
+    public void decideRockRockTie() {
 		Selections selections = new Selections(ItemFactory.getItemWithShape(Shape.ROCK), ItemFactory.getItemWithShape(Shape.ROCK));
 		EnhancedDecisionMaker.getInstance().decide(selections);       
         assertTie(selections);  
 	}
 	
 	@Test
-    public void testScissorScissor() {
+    public void decideScissorScissorTie() {
 		Selections selections = new Selections(ItemFactory.getItemWithShape(Shape.SCISSOR), ItemFactory.getItemWithShape(Shape.SCISSOR));
 		EnhancedDecisionMaker.getInstance().decide(selections);       
         assertTie(selections);  
 	}
 	
 	@Test
-    public void testWellWell() {
+    public void decideWellWellTie() {
 		Selections selections = new Selections(ItemFactory.getItemWithShape(Shape.WELL), ItemFactory.getItemWithShape(Shape.WELL));
 		EnhancedDecisionMaker.getInstance().decide(selections);       
         assertTie(selections);  
