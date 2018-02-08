@@ -3,8 +3,7 @@ A coding kata
 
 # ToDo
 
-- add more tests for playcontroller
-- swagger for REST API?
+- Swagger for REST API?
 - add security 
 
 # sample client calls
@@ -21,9 +20,9 @@ curl -X POST -H "Content-Type: application/json" http://localhost:8080/play -d '
 
 curl -X POST -H "Content-Type: application/json" http://localhost:8080/play -d '{"shape": "Stein", "gameMode": "Fortgeschritten"}'
 
-curl -X POST -H "Content-Type: application/json" http://localhost:8080/play -d '{"shape": "blabla", "gameMode": "Fortgeschritten"}'
+curl -X POST -H "Content-Type: application/json" http://localhost:8080/play -d '{"shape": "Handtuch", "gameMode": "Fortgeschritten"}'
 
-curl -X POST -H "Content-Type: application/json" http://localhost:8080/play -d '{"shape": "Stein", "gameMode": "blabla"}'
+curl -X POST -H "Content-Type: application/json" http://localhost:8080/play -d '{"shape": "Stein", "gameMode": "Offline"}'
 
 # misc
 

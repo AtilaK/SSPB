@@ -64,28 +64,28 @@ public class PlayController {
     	return createPlayResponse(game);    			
     }
 
-	private GameMode analyseGameMode(PlayRequest userRequest) {
-		if (GameMode.BASIC.toString().equals(userRequest.getGameMode())) {
+	private GameMode analyseGameMode(PlayRequest playRequest) {
+		if (GameMode.BASIC.toString().equals(playRequest.getGameMode())) {
     		return GameMode.BASIC;
     		
-    	} else if (GameMode.ENHANCED.toString().equals(userRequest.getGameMode())) {
+    	} else if (GameMode.ENHANCED.toString().equals(playRequest.getGameMode())) {
     		return GameMode.ENHANCED;
     		
     	}
 		return null;
 	}
     
-	private Shape analyseShape(PlayRequest userRequest, GameMode gameMode) {
-		if (Shape.ROCK.toString().equals(userRequest.getShape())) {
+	private Shape analyseShape(PlayRequest playRequest, GameMode gameMode) {
+		if (Shape.ROCK.toString().equals(playRequest.getShape())) {
 			return Shape.ROCK;
 			
-		} else if (Shape.SCISSOR.toString().equals(userRequest.getShape())) {
+		} else if (Shape.SCISSOR.toString().equals(playRequest.getShape())) {
 			return Shape.SCISSOR;
 			
-		} else if (Shape.PAPER.toString().equals(userRequest.getShape())) {
+		} else if (Shape.PAPER.toString().equals(playRequest.getShape())) {
 			return Shape.PAPER;
 			
-		} else if (gameMode.equals(GameMode.ENHANCED) && Shape.WELL.toString().equals(userRequest.getShape())) {
+		} else if (gameMode.equals(GameMode.ENHANCED) && Shape.WELL.toString().equals(playRequest.getShape())) {
 			return Shape.WELL;
 			
 		}
