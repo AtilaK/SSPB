@@ -1,10 +1,13 @@
 package core;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * DTO to transport JSON input for the REST service called play
- * @author atila
  * 
  */
+@ApiModel
 public class PlayRequest {
 
 	public PlayRequest() {
@@ -15,9 +18,11 @@ public class PlayRequest {
 		this.shape = shape;
 		this.gameMode = gameMode;
 	}
-
+	
+	@ApiModelProperty(required = true)
 	private String shape;
 	
+	@ApiModelProperty(required = true)
 	private String gameMode;
 
 	public String getShape() {

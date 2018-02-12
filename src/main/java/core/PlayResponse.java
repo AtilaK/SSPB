@@ -1,19 +1,26 @@
 package core;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel
 public class PlayResponse {
 
-	public PlayResponse () {
-		
-	}
+	public PlayResponse () {}
 	
+	@ApiModelProperty(required = true)
 	public String resultShort;
 	
+	@ApiModelProperty(required = true)
 	public String resultDetailed;
 	
+	@ApiModelProperty(required = true)
 	public String yourShape;
 	
+	@ApiModelProperty(required = true)
 	public String opponentShape;
 	
+	@ApiModelProperty(required = true)
 	public String gameMode;
 
 	public String getResultShort() {
