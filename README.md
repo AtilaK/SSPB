@@ -3,8 +3,7 @@ A coding kata
 
 # ToDo
 
-- Swagger for REST API?
-- add security 
+- add security (Basic Authentication, OAuth2, JWT)
 
 # sample client calls
 
@@ -25,6 +24,10 @@ curl -X POST -H "Content-Type: application/json" http://localhost:8080/play -d '
 curl -X POST -H "Content-Type: application/json" http://localhost:8080/play -d '{"shape": "Stein", "gameMode": "Offline"}'
 
 # misc
+
+http://localhost:8080/swagger-ui.html  => for swagger ui
+
+http://localhost:8080/v2/api-docs 	   => for swagger api docs as JSON
 
 mvn package 			=> packages the jar
 mvn spring-boot::run 	=> runs the jar (spring boot application)
