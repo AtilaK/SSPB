@@ -3,7 +3,7 @@ A coding kata
 
 # ToDo
 
-- add security (Basic Authentication, OAuth2, JWT)
+Add security (JWT)
 
 # Misc
 
