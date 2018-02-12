@@ -32,5 +32,3 @@ curl -X POST -H "Content-Type: application/json" http://localhost:8080/play -d '
 curl -X POST -H "Content-Type: application/json" http://localhost:8080/play -d '{"shape": "Handtuch", "gameMode": "Fortgeschritten"}'
 
 curl -X POST -H "Content-Type: application/json" http://localhost:8080/play -d '{"shape": "Stein", "gameMode": "Offline"}'
-
-
