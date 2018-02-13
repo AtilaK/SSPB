@@ -76,31 +76,17 @@ public class Game {
 	}
 	
 	/**
-	 * Creates a random item
-	 * bound = upper bound exclusive: 4 for basic game and 5 for enhanced game
-	 * @return
+	 * Creates a random item using random number generator
+	 * In basic game mode there are 3 valid items, in enhanced game 4
+	 * 
+	 * @return a random item
 	 */
 	private Item getRandomItem (GameMode gameMode) {
+	
+		//bound = upper bound exclusive, therefore bound = numberOfValidItems+1
+		int randomNum = ThreadLocalRandom.current().nextInt(1, gameMode.getnumberOfValidItems()+1);	
 		
-		int bound = 4;
-		
-		if (GameMode.ENHANCED.equals(gameMode)) {
-			bound = 5;	
-		}
-		
-		int randomNum = ThreadLocalRandom.current().nextInt(1, bound);
-		
-		if (randomNum == 1) {
-			return ItemFactory.getItemWithShape(Shape.ROCK);
-		} else if (randomNum == 2) {
-			return ItemFactory.getItemWithShape(Shape.SCISSOR);
-		} else if (randomNum == 3) {
-			return ItemFactory.getItemWithShape(Shape.PAPER);
-		} else if (randomNum == 4) {
-			return ItemFactory.getItemWithShape(Shape.WELL);
-		}
-		
-		return ItemFactory.getItemWithShape(Shape.ROCK);
+		return ItemFactory.getItemWithShapeId(randomNum);		
 	}
 	
 }

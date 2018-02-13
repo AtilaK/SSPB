@@ -1,4 +1,5 @@
 # SSPB
+
 A coding kata
 
 # ToDo
@@ -7,11 +8,11 @@ Add security (JWT)
 
 # Misc
 
-http://localhost:8080/swagger-ui.html  => for swagger ui
+http://localhost:8080/swagger-ui.html  => for Swagger ui
 
-http://localhost:8080/v2/api-docs 	   => for swagger api docs as JSON
+http://localhost:8080/v2/api-docs 	   => for Swagger api docs as JSON
 
-mvn package 			=> packages the jar
+mvn package 			=> packages the jar, runs tests and creates jacoco test reports (target/site/jacoco/index.html)
 
 mvn spring-boot::run 	=> runs the jar (spring boot application)
 

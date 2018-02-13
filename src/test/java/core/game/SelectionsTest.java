@@ -55,6 +55,4 @@ public class SelectionsTest {
         assertThat(selections.getWinningItem(), is(nullValue()));
 	}
 	
-
-	
 }

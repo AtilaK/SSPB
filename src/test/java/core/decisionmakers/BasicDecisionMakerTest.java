@@ -16,42 +16,42 @@ public class BasicDecisionMakerTest {
     public void decideScissorRockWinnerB() {
 		Selections selections = new Selections(ItemFactory.getItemWithShape(Shape.SCISSOR), ItemFactory.getItemWithShape(Shape.ROCK));
         BasicDecisionMaker.getInstance().decide(selections);       
-        userBWinnerAndUserALooser(selections);  
+        userBWinnerAndUserALoser(selections);  
 	}
 	
 	@Test
     public void decideRockScissorWinnerA() {
 		Selections selections = new Selections(ItemFactory.getItemWithShape(Shape.ROCK), ItemFactory.getItemWithShape(Shape.SCISSOR));
         BasicDecisionMaker.getInstance().decide(selections);       
-        userAWinnerAndUserBLooser(selections);
+        userAWinnerAndUserBLoser(selections);
 	}	
 
 	@Test
     public void decidePaperRockWinnerA() {
 		Selections selections = new Selections(ItemFactory.getItemWithShape(Shape.PAPER), ItemFactory.getItemWithShape(Shape.ROCK));
         BasicDecisionMaker.getInstance().decide(selections);       
-        userAWinnerAndUserBLooser(selections);
+        userAWinnerAndUserBLoser(selections);
 	}
 	
 	@Test
     public void decideRockPaperWinnerB() {
 		Selections selections = new Selections(ItemFactory.getItemWithShape(Shape.ROCK), ItemFactory.getItemWithShape(Shape.PAPER));
         BasicDecisionMaker.getInstance().decide(selections);       
-        userBWinnerAndUserALooser(selections);
+        userBWinnerAndUserALoser(selections);
 	}
 	
 	@Test
     public void decideScissorPaperWinnerA() {
 		Selections selections = new Selections(ItemFactory.getItemWithShape(Shape.SCISSOR), ItemFactory.getItemWithShape(Shape.PAPER));
         BasicDecisionMaker.getInstance().decide(selections);       
-        userAWinnerAndUserBLooser(selections);   
+        userAWinnerAndUserBLoser(selections);   
 	}
 	
 	@Test
     public void decidePaperScissorWinnerB() {
 		Selections selections = new Selections(ItemFactory.getItemWithShape(Shape.PAPER), ItemFactory.getItemWithShape(Shape.SCISSOR));
         BasicDecisionMaker.getInstance().decide(selections);       
-        userBWinnerAndUserALooser(selections);  
+        userBWinnerAndUserALoser(selections);  
 	}
 	
 	@Test
@@ -75,17 +75,23 @@ public class BasicDecisionMakerTest {
         assertTie(selections);  
 	}
 	
+	@Test
+    public void testDefaultDecisionMakerTypeNotDecisionMaker() {		
+		assertThat(BasicDecisionMaker.getInstance().isEnhancedDecisionMaker(), is(false));     
+       
+	}
+		
 	private void assertTie(Selections selections) {
 		assertThat(selections.getHumanUserItem().isWinner(), is(false));
         assertThat(selections.getAIUserItem().isWinner(), is(false));		
 	}
 
-	private void userAWinnerAndUserBLooser(Selections selections) {
+	private void userAWinnerAndUserBLoser(Selections selections) {
 		assertThat(selections.getHumanUserItem().isWinner(), is(true));
         assertThat(selections.getAIUserItem().isWinner(), is(false));
 	}	
 	
-	private void userBWinnerAndUserALooser(Selections selections) {
+	private void userBWinnerAndUserALoser(Selections selections) {
 		assertThat(selections.getAIUserItem().isWinner(), is(true));
         assertThat(selections.getHumanUserItem().isWinner(), is(false));
 	}	

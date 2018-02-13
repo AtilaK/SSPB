@@ -16,16 +16,8 @@ public class Selections {
 		return humanUserItem;
 	}
 	
-	public void setHumanUserItem(Item item) {
-		this.humanUserItem = item;
-	}
-	
 	public Item getAIUserItem() {
 		return aiUserItem;
-	}
-	
-	public void setAIUserItem(Item item) {
-		this.aiUserItem = item;
 	}
 
 	/**

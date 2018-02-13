@@ -1,19 +1,23 @@
 package core.game;
 
 public enum GameMode {
-	BASIC("Klassik"), ENHANCED("Fortgeschritten");
+	BASIC("Klassik", 3), ENHANCED("Fortgeschritten", 4);
 	
 	private String mode;
 	
-	private GameMode(String mode) {
+	private int numberOfValidItems;
+	
+	private GameMode(String mode, int numberOfValidItems) {
 		this.mode = mode;
+		this.numberOfValidItems = numberOfValidItems;
 	}
 
-	public String getMode() {
-		return mode;
+	public int getnumberOfValidItems() {
+		return numberOfValidItems;
 	}
-
+	
 	public String toString() {
 		return this.mode;
-	}
+	}	
+	
 }

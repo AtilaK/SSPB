@@ -40,7 +40,7 @@ public class PlayControllerTest {
   }
   
   @Test
-  public void getPlayWithValidRequestCheckResultShort() throws Exception {
+  public void getPlayWithValidRequestCheckResultShortInBasicGameMode() throws Exception {
 	  	  	  
 	  String inputJson = new Gson().toJson( new PlayRequest("Schere", "Klassik"));
 	  
@@ -62,6 +62,33 @@ public class PlayControllerTest {
 		  assertThat(GameResult.TIE.toString(), is(resultShort));
 	  }	  
   }
+  
+  @Test
+  public void getPlayWithValidRequestCheckResultShortInAdvancedGameMode() throws Exception {
+	  	  	  
+	  String inputJson = new Gson().toJson( new PlayRequest("Brunnen", "Fortgeschritten"));
+	  
+	  MvcResult result = mvc.perform(MockMvcRequestBuilders.post("/play").contentType(MediaType.APPLICATION_JSON).content(inputJson)).andReturn();      
+
+	  JsonObject jsonResponseObject = new Gson().fromJson(result.getResponse().getContentAsString(), JsonObject.class);
+	  
+	  String opponentShape = jsonResponseObject.get("opponentShape").getAsString();
+	  
+	  String resultShort = jsonResponseObject.get("resultShort").getAsString();
+	  
+	  if (Shape.PAPER.toString().equals(opponentShape)) {
+		  assertThat(GameResult.LOST.toString(), is(resultShort));
+		  
+	  } else if (Shape.ROCK.toString().equals(opponentShape)) {
+		  assertThat(GameResult.WON.toString(), is(resultShort));
+		  
+	  } else if (Shape.SCISSOR.toString().equals(opponentShape)) {
+		  assertThat(GameResult.WON.toString(), is(resultShort));  
+		  
+	  } else {
+		  assertThat(GameResult.TIE.toString(), is(resultShort));
+	  }	  
+  }  
   
   @Test
   public void getPlayWithInvalidRequestStatus400ClientError() throws Exception {
