@@ -30,9 +30,9 @@ public class PlayControllerTest {
   private MockMvc mvc;
   
   @Test
-  public void getPlayWithValidRequestStatusOK() throws Exception {
+  public void testPlayWithValidRequestStatusOK() throws Exception {
 	  	  
-	  String inputJson = new Gson().toJson(new PlayRequest("Schere", "Klassik"));
+	  String inputJson = new Gson().toJson(new PlayRequest("Papier", "Klassik"));
 	  
       mvc.perform(MockMvcRequestBuilders.post("/play").contentType(MediaType.APPLICATION_JSON).content(inputJson))
       .andExpect(status().isOk());     
@@ -40,7 +40,7 @@ public class PlayControllerTest {
   }
   
   @Test
-  public void getPlayWithValidRequestCheckResultShortInBasicGameMode() throws Exception {
+  public void testPlayWithValidRequestCheckResultShortInBasicGameMode() throws Exception {
 	  	  	  
 	  String inputJson = new Gson().toJson( new PlayRequest("Schere", "Klassik"));
 	  
@@ -64,7 +64,7 @@ public class PlayControllerTest {
   }
   
   @Test
-  public void getPlayWithValidRequestCheckResultShortInAdvancedGameMode() throws Exception {
+  public void testPlayWithValidRequestCheckResultShortInAdvancedGameMode() throws Exception {
 	  	  	  
 	  String inputJson = new Gson().toJson( new PlayRequest("Brunnen", "Fortgeschritten"));
 	  
@@ -91,7 +91,7 @@ public class PlayControllerTest {
   }  
   
   @Test
-  public void getPlayWithInvalidRequestStatus400ClientError() throws Exception {
+  public void testPlayWithInvalidRequestStatus400ClientError() throws Exception {
 	  
 	  String inputJson = new Gson().toJson(new PlayRequest("Handtuch", "Fortgeschritten"));
 	  
@@ -101,7 +101,7 @@ public class PlayControllerTest {
   }
   
   @Test
-  public void getPlayWithInvalidItemCheckErrorMessage() throws Exception {
+  public void testPlayWithInvalidItemCheckErrorMessage() throws Exception {
 	  
 	  String inputJson = new Gson().toJson(new PlayRequest("Handtuch", "Fortgeschritten"));
 	  
@@ -113,7 +113,7 @@ public class PlayControllerTest {
   }
  
   @Test
-  public void getPlayWithInvalidGameModeCheckErrorMessage() throws Exception {
+  public void testPlayWithInvalidGameModeCheckErrorMessage() throws Exception {
 	  
 	  String inputJson = new Gson().toJson(new PlayRequest("Stein", "Offline"));
 	  
