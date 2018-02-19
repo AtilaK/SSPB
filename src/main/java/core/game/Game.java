@@ -2,7 +2,7 @@ package core.game;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import core.decisionmakers.BasicDecisionMaker;
 import core.decisionmakers.DecisionMaker;
@@ -10,7 +10,7 @@ import core.decisionmakers.EnhancedDecisionMaker;
 import core.items.Item;
 import core.items.ItemFactory;
 
-@Component
+@Service
 public class Game {
 	
 	private GameMode gameMode;
