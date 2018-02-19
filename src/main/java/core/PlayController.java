@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -25,7 +24,6 @@ import core.game.GameResult;
 import core.game.Shape;
 
 @RestController
-@ComponentScan("game")
 public class PlayController {
 	  
 	@Autowired Environment environment;
